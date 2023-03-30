@@ -1,14 +1,21 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
+
 // Connecting with mongo db
-mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`, {
+const mongoString = process.env.DATABASE_URL;
+mongoose.connect(mongoString, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-})
-.then(() => console.log('MongoDB connected'))
-.catch((err) => {
-  console.log(`MongoDB connection error: ${err}`);
-  process.exit(1); // exit the process with an error code
+});
+
+const database = mongoose.connection;
+
+database.on('error', (error) => {
+  console.log(error);
+});
+
+database.once('open', () => {
+  console.log('Database Connected');
 });
 
 module.exports = mongoose;

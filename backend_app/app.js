@@ -1,17 +1,13 @@
 const express = require('express');
 const path = require('path');
-
 const mongoose = require('./db/mongoose');
-
-// This is a Node JS package, also known as the express js middleware. 
 // It allows enabling CORS with multiple options.
 const cors = require('cors');
-// The body-parser npm module is a JSON parsing middleware. 
 // It helps to parse the JSON data, plain text or a whole object.
 const bodyParser = require('body-parser');
 
-// homepage router
-const indexRoute = require('./routes/index')
+// task router
+const taskRoute = require('./routes/tasks.route')
 
 const app = express()
 
@@ -19,13 +15,14 @@ const app = express()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
+
 // app.use(express.static(path.join(__dirname, 'dist/frontend-app')))
 // app.use('/', express.static(path.join(__dirname, 'dist/frontend-app')))
 
 // app.get('/', function(req, res) {res.send("Hello world!")})
 
 // render the homepage
-app.use('/', indexRoute);
+app.use('/api', taskRoute);
 
 // PORT 
 const port = process.env.PORT || 3010
