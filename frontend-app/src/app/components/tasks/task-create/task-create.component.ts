@@ -8,8 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class TaskCreateComponent implements OnInit {
   submitted: boolean = false;
-  taskForm: FormGroup;
-  task
+
 
   constructor() { }
 

@@ -1,4 +1,4 @@
-const Story = require('../models/story');
+const {Story} = require('../models/story');
 
 const storyController = {};
 

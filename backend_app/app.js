@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const connectDB = require('./db/mongoose');
-const seedData = require('./db/seed');
+// const seedData = require('./db/seed');
 // It allows enabling CORS with multiple options.
 const cors = require('cors');
 // It helps to parse the JSON data, plain text or a whole object.
@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-// app.use(express.static(path.join(__dirname, 'dist/frontend-app')))
+// app.use(express.static(path.join(__dirname, 'public')))
 // app.use('/', express.static(path.join(__dirname, 'dist/frontend-app')))
 
 // app.get('/', function(req, res) {res.send("Hello world!")})
@@ -38,7 +38,8 @@ app.use('/api/stories', storyRoutes);
 
 const server = async () => {
   try {
-    await connectDB;
+    await connectDB();
+    console.log("Database connection established")
     // await seedData();
     app.listen(port, () => console.log(`Listening on port ${port}...`))
   } catch (err) {

@@ -1,1 +1,14 @@
-<p>story-list works!</p>
+<h2>Stories</h2>
+<ul>
+  <li *ngFor="let story of stories">
+    <h3>{{ story.title }}</h3>
+    <p>{{ story.description }}</p>
+    <p>Status: {{ story.status }}</p>
+    <p>Tasks:</p>
+    <ul>
+      <li *ngFor="let task of story.tasks">
+        {{ task }}
+      </li>
+    </ul>
+  </li>
+</ul>
