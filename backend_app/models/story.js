@@ -1,45 +1,32 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-// const { taskSchema } = require('./task');
+const { Task } = require('./task');
 
-let taskSchema = new Schema({
-  estimate: {
-    type: Number,
-    required: true
-  },
-  status: {
-    type: String,
-    enum: ['Open', 'Done'],
-    default: 'Open'
-  }
+const storySchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String },
+  tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }],
+  status: { type: String, enum: ['Open', 'In Progress', 'Done'], default: 'Open' },
 }, {
-    collection: 'tasks'
+  collection: 'stories'
 });
 
-module.exports = { taskSchema };
-
-const storySchema = new Schema({
-    tasks: [taskSchema],
-    status: {
-        type: String,
-        enum: ['Open', 'Done'],
-        default: 'Open'
-    }
-});
+storySchema.methods.generateRandomTasks = async function() {
+  const numTasks = Math.floor(Math.random() * 10) + 1; // generate a random number of tasks between 1 and 10
+  const tasks = [];
+  for (let i = 0; i < numTasks; i++) {
+    const task = new Task({
+      title: `Task ${i+1} for ${this.title}`,
+      description: `Description for Task ${i+1}`,
+      estimate: Math.floor(Math.random() * 10) + 1, // generate a random estimate between 1 and 10
+      storyId: this._id,
+    });
+    tasks.push(task);
+    await task.save();
+  }
+  this.tasks = tasks;
+  await this.save();
+};
 
 const Story = mongoose.model('Story', storySchema);
 
 module.exports = { Story };
-// Define collection and schema
-// const storySchema = new Schema({
-//     tasks: [taskSchema],
-//     status: {
-//         type: String,
-//         enum: ['Open', 'Done'],
-//         default: 'Open'
-//     }
-// });
-
-// const Story = mongoose.model('Story', storySchema);
-
-// module.exports = { Story };

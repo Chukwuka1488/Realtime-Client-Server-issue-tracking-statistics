@@ -1,17 +1,25 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
-const mongoose = require('./db/mongoose');
+const connectDB = require('./db/mongoose');
+const seedData = require('./db/seed');
 // It allows enabling CORS with multiple options.
 const cors = require('cors');
 // It helps to parse the JSON data, plain text or a whole object.
 const bodyParser = require('body-parser');
 
 // task router
-const taskRoute = require('./routes/tasks.route')
+const taskRoutes = require('./routes/tasks.route')
+// story router
+const storyRoutes = require('./routes/stories.route')
 
 const app = express()
+// PORT 
+const port = process.env.PORT || 3010
 
 // app.use(logger('dev'));
+
+// Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
@@ -21,24 +29,22 @@ app.use(cors());
 
 // app.get('/', function(req, res) {res.send("Hello world!")})
 
-// render the homepage
-app.use('/api', taskRoute);
+// render the tasks
+app.use('/api/tasks', taskRoutes);
+// render the stories
+app.use('/api/stories', storyRoutes);
 
-// PORT 
-const port = process.env.PORT || 3010
 
-const server = app.listen(port, () => console.log(`Listening on port ${port}...`))
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+const server = async () => {
+  try {
+    await connectDB;
+    // await seedData();
+    app.listen(port, () => console.log(`Listening on port ${port}...`))
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+} 
 
-// error handler
-app.use(function(err, req, res, next) {
-  console.error(err.message) // Log error message in our server's console
-  if (!err.statusCode) err.statusCode = 500 // If err has no specified error code, set error code to 'Internal Server Error (500)'
-  res.status(err.statusCode).send(err.message) // All HTTP requests must have a response, so let's send back an error with its status code and message
-});
+server();

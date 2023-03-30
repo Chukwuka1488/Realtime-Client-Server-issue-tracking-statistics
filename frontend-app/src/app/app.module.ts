@@ -12,6 +12,7 @@ import { StoryListComponent } from './components/stories/story-list/story-list.c
 import { TaskCreateComponent } from './components/tasks/task-create/task-create.component';
 import { TaskEditComponent } from './components/tasks/task-edit/task-edit.component';
 import { TaskListComponent } from './components/tasks/task-list/task-list.component';
+import { TaskApiService } from './service/task-api.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { TaskListComponent } from './components/tasks/task-list/task-list.compon
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [TaskApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,1 +1,10 @@
-<p>task-list works!</p>
+<div>
+    <h2>Tasks</h2>
+    <button (click)="createTask()">Create Task</button>
+    <ul>
+      <li *ngFor="let task of tasks">
+        {{ task.description }} - {{ task.status }} - {{ task.estimate }}
+      </li>
+    </ul>
+  </div>
+  
