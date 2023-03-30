@@ -10,8 +10,8 @@ const cors = require('cors');
 // It helps to parse the JSON data, plain text or a whole object.
 const bodyParser = require('body-parser');
 
-// routers
-const storyRoute = require('./routes')
+// homepage router
+const indexRoute = require('./routes/index')
 
 const app = express()
 
@@ -22,8 +22,10 @@ app.use(cors());
 // app.use(express.static(path.join(__dirname, 'dist/frontend-app')))
 // app.use('/', express.static(path.join(__dirname, 'dist/frontend-app')))
 
-app.get('/', function(req, res) {res.send("Hello world!")})
-// app.use('/api', storyRoute);
+// app.get('/', function(req, res) {res.send("Hello world!")})
+
+// render the homepage
+app.use('/', indexRoute);
 
 // PORT 
 const port = process.env.PORT || 3010
