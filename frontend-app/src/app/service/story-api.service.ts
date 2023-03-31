@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Story } from '../model/story';
+import { Task } from '../model/task';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,23 @@ export class StoryApiService {
 
   constructor(private http: HttpClient) { }
 
-  // // create story
-  // createStory(data: any): Observable<any> {
-  //   let url = `${this.baseUri}/create`;
-  //   return this.http.post(url, data).pipe(catchError(this.errorMgmt));
-  // }
+  createStory(newStory: Story): Observable<Story> {
+    console.log("check service", newStory)
+    const payload = {
+      title: newStory.title,
+      description: newStory.description,
+      status: newStory.status,
+      tasks: newStory.tasks
+    };
+    return this.http.post<Story>(`${this.baseUri}`, payload)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        // Handle error
+        console.error('Error creating story:', error);
+        return throwError(() => new Error("error"));
+      })
+    );
+  }
 
   // // read story
   // getStory(id: String): Observable<any> {

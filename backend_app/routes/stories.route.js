@@ -5,4 +5,7 @@ const router = express.Router();
 
 router.get('/', storyController.getAllStories);
 
+// Route for creating a new story
+router.post('/', storyController.createStory);
+
 module.exports = router;

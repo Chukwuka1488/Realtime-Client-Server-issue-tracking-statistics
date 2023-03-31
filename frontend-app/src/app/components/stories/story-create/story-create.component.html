@@ -1,1 +1,31 @@
-<p>story-create works!</p>
+<!-- <mat-card class="create-story-card">
+    <mat-card-header>
+      <mat-card-title>Create New Story</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form #storyForm="ngForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput [(ngModel)]="story.title" name="title" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="story.description" name="description" required></textarea>
+        </mat-form-field>
+        <button mat-raised-button type="submit" [disabled]="!storyForm.form.valid">Create</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+   -->
+
+   <form #storyForm="ngForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" [(ngModel)]="story.title" required>
+    </div>
+    <div>
+      <label for="description">Description</label>
+      <textarea id="description" name="description" [(ngModel)]="story.description" required></textarea>
+    </div>
+    <button type="submit">Create Story</button>
+  </form>
