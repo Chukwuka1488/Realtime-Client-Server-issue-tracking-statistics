@@ -1,9 +1,18 @@
-<nav mat-tab-nav-bar>
-  <button mat-button routerLinkActive="active" routerLink="/stories-list">View Stories</button>
-  <button mat-button routerLinkActive="active" routerLink="/create-story">Add Story</button>
-</nav>
-<nav mat-tab-nav-bar>
-  <button mat-button routerLinkActive="active" routerLink="/tasks-list">View Tasks</button>
-  <button mat-button routerLinkActive="active" routerLink="/create-task">Add Task</button>
-</nav>
-<router-outlet></router-outlet>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My App</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <nav class="tab-nav-bar">
+    <button class="tab-button" routerLinkActive="active" routerLink="/stories-list">View Stories</button>
+    <button class="tab-button" routerLinkActive="active" routerLink="/create-story">Add Story</button>
+    <button class="tab-button" routerLinkActive="active" routerLink="/tasks-list">View Tasks</button>
+    <!-- <button class="tab-button" routerLinkActive="active" routerLink="/create-task">Add Task</button> -->
+  </nav>
+  <router-outlet></router-outlet>
+</body>
+</html>

@@ -1,12 +1,28 @@
-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 10px ;
-    margin: 10px 10px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    opacity: 0.8;
-  }
+.tab-nav-bar {
+  background-color: #f2f2f2;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.tab-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.tab-button:hover {
+  background-color: #ddd;
+}
+
+.tab-button.active {
+  background-color: #4CAF50;
+  color: white;
+}

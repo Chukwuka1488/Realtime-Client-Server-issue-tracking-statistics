@@ -27,20 +27,13 @@ export class StoryCreateComponent {
         description: `Description for Task ${i+1}`,
         estimate: Math.floor(Math.random() * 10) + 1, // generate a random estimate between 1 and 10
         timeSpent: Math.floor(Math.random() * 10) + 1,
-        storyId: this.story._id,
+        // storyId: this.story._id,
       });
       tasks.push(task);
     }
     return tasks;
   }
 
-
-  //   const story1 = new Story({
-//     title: 'Story 1',
-//     description: 'Description for Story 1',
-//   });
-//   await story1.save();
-//   await story1.generateRandomTasks();
   onSubmit() {
     console.log("check 1")
     this.story.tasks = this.createRandomTasks();

@@ -21,8 +21,6 @@ import { AppComponent } from './app.component';
 import { StoryCreateComponent } from './components/stories/story-create/story-create.component';
 import { StoryEditComponent } from './components/stories/story-edit/story-edit.component';
 import { StoryListComponent } from './components/stories/story-list/story-list.component';
-import { TaskCreateComponent } from './components/tasks/task-create/task-create.component';
-import { TaskEditComponent } from './components/tasks/task-edit/task-edit.component';
 import { TaskListComponent } from './components/tasks/task-list/task-list.component';
 import { TaskApiService } from './service/task-api.service';
 import { CommonModule } from '@angular/common';
@@ -33,8 +31,6 @@ import { CommonModule } from '@angular/common';
     StoryCreateComponent,
     StoryEditComponent,
     StoryListComponent,
-    TaskCreateComponent,
-    TaskEditComponent,
     TaskListComponent,
   ],
   imports: [
