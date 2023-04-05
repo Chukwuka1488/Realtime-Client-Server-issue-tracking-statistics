@@ -1,5 +1,13 @@
 ### Realtime-Client-Server-issue-tracking-statistics
 
+To run the application
+
+1. clone the repository
+2. cd into backend folder => run npm install to download all dependencies => start the server using nodemon app.js
+3. cd into the frontend folder => run npm install to download all dependencies => start the client using ng serve -o
+
+The tasks is yet to be completed as the worker pool part is yet to be done but the process of implementation is already described below.
+
 #### Tech Stack:
 1. MEAN stack
      MongoDB—the database - can store and stream binary information.
@@ -84,3 +92,47 @@ The aims of this stage are
 #### Hardware architecture
 1. Development hardware
 2. Production hardware: A common hardware architecture approach: one server to run the application code and API and a second, separate database server (A decoupled architecture using three servers: one for the database, one for the API, and one for the application code), (You can scale MEAN applications by having clusters of servers for each part of your entire application.)
+
+### Process:
+
+First Draft:
+API and Data Model Design:
+To achieve the objective of designing and implementing a Client/Server application that simulates the creation and completion of user-stories and tasks, I would suggest the following API and data model design:
+Data Model:
+The data model would consist of two main entities, 'Story' and 'Task'. One story can have many tasks, but a task can belong to only one story. The status of a story can be 'Open' or 'Done', and the status of a task can be 'Open' or 'Done'. Besides the status, both entities would have other attributes like 'name,' 'description,' and 'estimate,' which would be used to simulate the creation and completion of user-stories and tasks.
+API:
+The server would expose two endpoints, one for creating a story and another for creating a task. The client would send a POST request to the server's API with the necessary data to create a story or a task. The server would then process the data, update the corresponding entities, and send real-time updates to the client.
+Real-time Aspect of Informing the Client about Changes:
+To inform the client about changes in real-time, the server would use WebSockets. When the client connects to the server, the server would establish a WebSocket connection and send real-time updates to the client using the WebSocket connection.
+Data Persistence:
+To persist the data, the server would use a database. The data would be stored in tables for 'Story' and 'Task.' When the server starts, it would read the data from the database and continue processing the data.
+User Interface Technology:
+The client interface can be implemented using any modern frontend technology like React, Angular, or Vue. The UI would display the following information in real-time:
+	•	Stories produced per sec
+	•	Stories completed per sec
+	•	Number of open stories
+	•	Number of completed stories
+Interesting Implementation Choices:
+To optimize performance, the server would use a pool of workers to process the tasks. The number of workers would be dynamically adjusted based on the incoming load. Additionally, the server would use an in-memory cache to store frequently accessed data, like the number of open stories, to reduce the number of database queries. Finally, to make the UI more responsive, the client would use a web worker to offload the processing of incoming real-time updates.
+*******************************************************************************
+
+
+This is a complex task that involves multiple components and requires integration between the server and client-side code. I will outline the steps required to implement the desired functionality.
+	1	Server-side implementation:
+a) Implement a worker pool that can handle incoming tasks from multiple clients. The worker pool should be able to handle the estimated processing time for each task and adjust the number of workers based on the incoming load.
+b) When a task is received by the server, the server should sleep for the duration of the estimated processing time. During this time, the server can send real-time updates to the client to display processing statistics.
+c) When a task is completed, the server should update the corresponding story and check if all the tasks in the story are completed. If all tasks are completed, the story should be marked as done.
+d) The server should persist any data to continue processing after a restart.
+	2	Client-side implementation:
+a) Create a user interface that can display processing statistics in real-time. The user interface should display the following information:
+	•	Stories produced per sec
+	•	Stories completed per sec
+b) When a story is created, the client should send the story to the server and display the estimated processing time.
+c) During the processing time, the client should display real-time updates on the processing statistics.
+d) When a story is completed, the client should display the completion time and update the processing statistics.
+	3	Integration between server and client-side:
+a) Implement a socket connection between the server and client-side code to send real-time updates.
+b) When a task is received by the server, the server should send a message to the client-side to update the processing statistics.
+c) When a task is completed, the server should send a message to the client-side to update the completion time and processing statistics.
+d) The client-side should listen for these messages and update the user interface accordingly.
+The above steps outline the basic approach to implementing the desired functionality. The specific implementation details will depend on the technologies used and the specific requirements of the project.
