@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Story } from '../model/story';
 import { Task } from '../model/task';
+import io from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ import { Task } from '../model/task';
 export class StoryApiService {
   private baseUri: string = 'http://localhost:9000/api/stories';
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
+  private socket = io(this.baseUri)
 
   constructor(private http: HttpClient) { }
 
   createStory(newStory: Story): Observable<Story> {
-    console.log("check service", newStory)
     const payload = {
       title: newStory.title,
       description: newStory.description,
@@ -32,47 +33,12 @@ export class StoryApiService {
     );
   }
 
-  // // read story
-  // getStory(id: String): Observable<any> {
-  //   let url = `${this.baseUri}/read/${id}`;
-  //   return this.http.get(url, { headers: this.headers }).pipe(
-  //     map((res: any) => {
-  //       return res || {};
-  //     }),
-  //     catchError(this.errorMgmt)
-  //   );
-  // }
   getAllStories(): Observable<Story[]> {
     return this.http.get<Story[]>(`${this.baseUri}`);
   }
 
-  // // update story
-  // updateStory(id: String, data): Observable<any> {
-  //   let url = `${this.baseUri}/update/${id}`;
-  //   return this.http.put(url, data, { headers: this.headers }).pipe(
-  //     catchError(this.errorMgmt)
-  //   );
-  // }
+  getNewData(data: any) {
+    this.socket.emit('newStory', data)
+  }
 
-  // // delete story
-  // deleteStory(id: String): Observable<any> {
-  //   let url = `${this.baseUri}/delete/${id}`;
-  //   return this.http.delete(url, { headers: this.headers }).pipe(
-  //     catchError(this.errorMgmt)
-  //   );
-  // }
-
-    // // Error handling
-    // errorMgmt(error: any) {
-    //   let errorMessage = '';
-    //   if (error.error instanceof ErrorEvent) {
-    //     // Get client-side error
-    //     errorMessage = error.error.message;
-    //   } else {
-    //     // Get server-side error
-    //     errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    //   }
-    //   console.log(errorMessage);
-    //   return throwError(errorMessage);
-    // }
 }

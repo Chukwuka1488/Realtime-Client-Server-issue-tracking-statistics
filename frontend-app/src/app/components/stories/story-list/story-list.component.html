@@ -23,7 +23,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let task of tasks">
+          <!-- use the getTasksForStory method to display only the tasks 
+            related to the current story -->
+            <tr *ngFor="let task of getTasksForStory(story._id)">
               <td>{{ task._id }}</td>
               <td>{{ task.title }}</td>
               <td>{{ task.description }}</td>

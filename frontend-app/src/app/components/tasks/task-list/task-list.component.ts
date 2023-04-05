@@ -15,13 +15,9 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskApiService.getAllTasks().subscribe(tasks => {
-      console.log("checking 1", tasks);
       this.tasks = tasks;
-      console.log("checking 2", tasks);
       this.taskApiService.getAllTasks().subscribe(tasks => {
-        console.log("checking 3", tasks);
         this.tasks = tasks;
-        console.log("checking 4", tasks);
       },
       error => {
         console.log("Error occurred while fetching tasks:", error);
