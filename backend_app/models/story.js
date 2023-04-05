@@ -10,22 +10,6 @@ const storySchema = new mongoose.Schema({
   collection: 'stories'
 });
 
-// storySchema.methods.generateRandomTasks = async function() {
-//   const numTasks = Math.floor(Math.random() * 10) + 1; // generate a random number of tasks between 1 and 10
-//   const tasks = [];
-//   for (let i = 0; i < numTasks; i++) {
-//     const task = new Task({
-//       title: `Task ${i+1} for ${this.title}`,
-//       description: `Description for Task ${i+1}`,
-//       estimate: Math.floor(Math.random() * 10) + 1, // generate a random estimate between 1 and 10
-//       storyId: this._id,
-//     });
-//     tasks.push(task);
-//     await task.save();
-//   }
-//   this.tasks = tasks;
-//   await this.save();
-// };
 
 const Story = mongoose.model('Story', storySchema);
 
