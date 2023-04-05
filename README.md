@@ -4,7 +4,13 @@ To run the application
 
 1. clone the repository
 2. cd into backend folder => run npm install to download all dependencies => start the server using nodemon app.js
-3. cd into the frontend folder => run npm install to download all dependencies => start the client using ng serve -o
+3. The .env file in the backend folder looks like this:
+```js
+PORT=9000
+DATABASE_URL = mongodb+srv://{username}:{password}@cluster0.ah9cyqh.mongodb.net/{database name}
+```
+4. If error is encountered: seed the database first by uncommenting the seed database lines in the app.js file
+5. cd into the frontend folder => run npm install to download all dependencies => start the client using ng serve -o
 
 The tasks is yet to be completed as the worker pool part is yet to be done but the process of implementation is already described below.
 
