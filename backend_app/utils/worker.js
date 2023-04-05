@@ -14,10 +14,10 @@ async function getUpdatedTasks() {
   return tasks;
 }
 
-function getEstimatedLoad() {
-  const cpuUsage = os.loadavg()[0] / os.cpus().length;
-  const memoryUsage = 1 - os.freemem() / os.totalmem();
-  return cpuUsage + memoryUsage;
-}
+// function getEstimatedLoad() {
+//   const cpuUsage = os.loadavg()[0] / os.cpus().length;
+//   const memoryUsage = 1 - os.freemem() / os.totalmem();
+//   return cpuUsage + memoryUsage;
+// }
 
-module.exports = { getUpdatedStories, getUpdatedTasks, getEstimatedLoad };
+module.exports = { getUpdatedStories, getUpdatedTasks };

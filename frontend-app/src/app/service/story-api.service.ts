@@ -3,7 +3,6 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Story } from '../model/story';
-import { Task } from '../model/task';
 import io from 'socket.io-client';
 
 @Injectable({

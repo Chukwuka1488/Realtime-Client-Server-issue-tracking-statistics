@@ -5,7 +5,7 @@
       <th>Title</th>
       <th>Description</th>
       <th>Status</th>
-      <th>Tasks</th>
+      <!-- <th>Tasks</th> -->
     </tr>
   </thead>
   <tbody>
@@ -14,7 +14,7 @@
       <td>{{ story.description }}</td>
       <td>{{ story.status }}</td>
       <td>
-        <table>
+        <!-- <table>
           <thead>
             <tr>
               <th>Title</th>
@@ -23,8 +23,6 @@
             </tr>
           </thead>
           <tbody>
-          <!-- use the getTasksForStory method to display only the tasks 
-            related to the current story -->
             <tr *ngFor="let task of getTasksForStory(story._id)">
               <td>{{ task._id }}</td>
               <td>{{ task.title }}</td>
@@ -32,7 +30,7 @@
               <td>{{ task.status }}</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
       </td>
     </tr>
   </tbody>
